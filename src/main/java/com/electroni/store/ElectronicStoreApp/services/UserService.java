@@ -1,6 +1,6 @@
 package com.electroni.store.ElectronicStoreApp.services;
 
-import com.electroni.store.ElectronicStoreApp.dtos.UserDto;
+import com.electroni.store.ElectronicStoreApp.dtoclasses.UserDto;
 import com.electroni.store.ElectronicStoreApp.entities.User;
 
 import java.util.List;

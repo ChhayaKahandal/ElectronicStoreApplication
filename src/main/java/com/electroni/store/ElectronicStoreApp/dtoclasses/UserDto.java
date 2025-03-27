@@ -1,7 +1,9 @@
-package com.electroni.store.ElectronicStoreApp.dtos;
+package com.electroni.store.ElectronicStoreApp.dtoclasses;
+
 
 import jakarta.persistence.Column;
 import lombok.*;
+
 
 @Getter
 @Setter
@@ -25,3 +27,4 @@ public class UserDto
     private String imageName;
 
 }
+
