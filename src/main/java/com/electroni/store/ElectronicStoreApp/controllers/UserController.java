@@ -4,6 +4,7 @@ package com.electroni.store.ElectronicStoreApp.controllers;
 import com.electroni.store.ElectronicStoreApp.dtoclasses.ApiResponseMessage;
 import com.electroni.store.ElectronicStoreApp.dtoclasses.UserDto;
 import com.electroni.store.ElectronicStoreApp.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class UserController
     //create
     @PostMapping
     //In Requestbody we are taking userdto details and return that userdto to service with responseentity.
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
     {
         UserDto userDto1=userService.createUser(userDto);
         return new ResponseEntity<>(userDto1, HttpStatus.CREATED);//sending userDto and https code.
@@ -29,7 +30,7 @@ public class UserController
     //update
     @PutMapping("/{userId}")//path uri variable.
     public ResponseEntity<UserDto> updateUser(@PathVariable("userId") String userId,
-                                              @RequestBody UserDto userDto)//jo user update krychha ahe tyacha id ghetoye ani ky ky update krych ahet te details ghteoy
+                                              @Valid @RequestBody UserDto userDto)//jo user update krychha ahe tyacha id ghetoye ani ky ky update krych ahet te details ghteoy
     {
         UserDto updatedUserDto1=userService.updateUser(userDto,userId);
         return new ResponseEntity<>(updatedUserDto1, HttpStatus.OK);

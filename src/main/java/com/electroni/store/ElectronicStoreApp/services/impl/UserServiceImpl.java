@@ -2,6 +2,7 @@ package com.electroni.store.ElectronicStoreApp.services.impl;
 
 import com.electroni.store.ElectronicStoreApp.dtoclasses.UserDto;
 import com.electroni.store.ElectronicStoreApp.entities.User;
+import com.electroni.store.ElectronicStoreApp.exception.ResourceNotFoundException;
 import com.electroni.store.ElectronicStoreApp.repositories.UserRepository;
 import com.electroni.store.ElectronicStoreApp.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -41,7 +42,11 @@ public class UserServiceImpl implements UserService
     @Override
     public UserDto updateUser(UserDto userDto, String userId)
     {
-        User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("User not found with this Id"));
+        //hanadling exception using custom exception class ResourceNotFoundException
+        User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with this Id"));
+        /*ResourceNotFoundException("User not found with this Id")); ha msg ya class chya para constructor mdhe jail .tithun to GlobalException
+        class mdhe ex.getMessage() ne get hoil ani aplyala to console vr disel.*/
+        //User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("User not found with this Id"));
         //here we are setting the new information from userDto to existing user.
         user.setName(userDto.getName());
         user.setPassword(userDto.getPassword());
@@ -57,7 +62,8 @@ public class UserServiceImpl implements UserService
     @Override
     public void deleteUser(String userId)
     {
-        User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with this id not found"));
+        //User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with this id not found"));
+        User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("user with this id not found"));
         userRepository.delete(user);
 
     }
@@ -73,14 +79,16 @@ public class UserServiceImpl implements UserService
     @Override
     public UserDto getUserById(String userId)
     {
-        User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("user not found with this id"));
+        //User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with this id not found"));
+        User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("user not found with this id"));//ha message hya class chya parameteri
         return entityToDto(user);
     }
 
     @Override
     public UserDto getUserByEmail(String email)
     {
-        User user=userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with given email id."));
+        //User user=userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with this id not found"));
+        User user=userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found with given email id."));
         return entityToDto(user);
     }
 
