@@ -39,7 +39,7 @@ public class UserDto
 
 
     //custom validation
-    @ImageNameValid()
+    @ImageNameValid
     private String imageName;
 
 }

@@ -26,7 +26,7 @@ public class User
     private String gender;
     @Column(length=1000)
     private String about;
-    @Column(name="user_image_name")
+    @Column(name= "user_image_name")
     private String imageName;
 
 }

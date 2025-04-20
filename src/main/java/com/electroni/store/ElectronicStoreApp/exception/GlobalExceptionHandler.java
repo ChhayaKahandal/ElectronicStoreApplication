@@ -50,4 +50,15 @@ public class GlobalExceptionHandler
 
 
     }
+
+
+
+    //logic to handle image file extension exception(handle BadApiRequest)
+    @ExceptionHandler(BadApiRequest.class)
+    public ResponseEntity<ApiResponseMessage> handleBadApiRequest(BadApiRequest ex)//ex is the obejet of generated exception for BadApiRequestclass.
+    {
+        logger.info("Bad Api request!!");
+        ApiResponseMessage response=ApiResponseMessage.builder().message(ex.getMessage()).status(HttpStatus.BAD_REQUEST).success(false).build();
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+    }
 }
