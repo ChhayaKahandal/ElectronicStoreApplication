@@ -14,6 +14,7 @@ public class Helper
          //<U,V> U is entity and V is dto.(mhnje return type ha dto(userDto or other) ahe ani apn parameter mdhe entity(user,catergory or other) ghetoy)
         List<U> entity = page.getContent();//using this we get list of users according to pagesize and pagenumber.
         List<V> dtoList=entity.stream().map(object->new ModelMapper().map(object,type)).collect(Collectors.toList());//object->new ModelMapper().map(object,V) here we conevrting our entity object into dto object
+        //karan apan service vrun controller la dto return krto.
 
 
         PageableResponse<V> response=new PageableResponse<>();
